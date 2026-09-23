@@ -3,269 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Student Management System</title>
-
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- CSS -->
+    <title>Student Management Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Icons ke liye Font Awesome link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="nav-list">
+                <li class="nav-item active">
+                    <i class="fa-solid fa-chart-pie"></i> Dashboard
+                </li>
+                <li class="nav-item">
+                    <i class="fa-solid fa-user-group"></i> Students
+                </li>
+                <li class="nav-item">
+                    <i class="fa-solid fa-book"></i> Courses
+                </li>
+                <li class="nav-item">
+                    <i class="fa-solid fa-calendar-check"></i> Attendence
+                </li>
+                <li class="nav-item">
+                    <i class="fa-solid fa-file-lines"></i> Marks
+                </li>
+            </ul>
+        </aside>
 
-    <!-- Header -->
-    <header class="header">
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Dashboard</h1>
+                <p>Welcome to the Student Management System</p>
+            </header>
 
-        <div>
-            <h1>🎓 Student Management System</h1>
-            <p>Manage student records easily</p>
-        </div>
-
-        <button id="themeBtn" onclick="toggleTheme()">
-            🌙 Dark Mode
-        </button>
-
-    </header>
-
-
-    <main class="container">
-
-        <!-- Dashboard Cards -->
-
-        <section class="dashboard">
-
-            <div class="stat-card">
-                <div class="stat-icon">👨‍🎓</div>
-                <div>
-                    <h3>Total Students</h3>
-                    <p id="totalStudents">0</p>
+            <!-- Stats Cards -->
+            <section class="stats-container">
+                <div class="stat-card">
+                    <div class="icon-box blue">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-title">Total Students</span>
+                        <span class="stat-value">5</span>
+                    </div>
                 </div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-icon">📚</div>
-                <div>
-                    <h3>Total Courses</h3>
-                    <p id="totalCourses">0</p>
+                <div class="stat-card">
+                    <div class="icon-box purple">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-title">Total Courses</span>
+                        <span class="stat-value">4</span>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="stat-card">
-                <div class="stat-icon">🔢</div>
-                <div>
-                    <h3>Records</h3>
-                    <p id="totalRecords">0</p>
-                </div>
-            </div>
-
-        </section>
-
-
-        <!-- Add Student -->
-
-        <section class="form-box">
-
-            <h2 id="formTitle">➕ Add New Student</h2>
-
-            <div class="form-grid">
-
-                <div class="input-group">
-                    <label>Roll Number</label>
-
-                    <input
-                        type="text"
-                        id="rollNo"
-                        placeholder="Enter Roll Number"
-                    >
+            <!-- Recent Data Sections -->
+            <section class="data-tables">
+                <div class="data-column">
+                    <h2>Recent Students</h2>
+                    <div id="recent-students-list" class="list-container">
+                        <!-- JS se data load hoga -->
+                    </div>
                 </div>
 
-
-                <div class="input-group">
-                    <label>Student Name</label>
-
-                    <input
-                        type="text"
-                        id="studentName"
-                        placeholder="Enter Student Name"
-                    >
+                <div class="data-column">
+                    <h2>Recent Marks</h2>
+                    <div id="recent-marks-list" class="list-container">
+                        <!-- JS se data load hoga -->
+                    </div>
                 </div>
-
-
-                <div class="input-group">
-                    <label>Course</label>
-
-                    <select id="course">
-
-                        <option value="">
-                            Select Course
-                        </option>
-
-                        <option value="B.Tech IT">
-                            B.Tech IT
-                        </option>
-
-                        <option value="B.Tech CSE">
-                            B.Tech CSE
-                        </option>
-
-                        <option value="BCA">
-                            BCA
-                        </option>
-
-                        <option value="MCA">
-                            MCA
-                        </option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
-
-            <div class="form-buttons">
-
-                <button
-                    class="add-btn"
-                    id="addBtn"
-                    onclick="addStudent()"
-                >
-                    ➕ Add Student
-                </button>
-
-
-                <button
-                    class="cancel"
-                    id="cancelBtn"
-                    onclick="cancelEdit()"
-                    style="display:none;"
-                >
-                    ❌ Cancel
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- Search and Filter -->
-
-        <section class="search-box">
-
-            <div class="search">
-
-                <span>🔍</span>
-
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search by roll number or name..."
-                    onkeyup="searchStudent()"
-                >
-
-            </div>
-
-
-            <select
-                id="filterCourse"
-                onchange="searchStudent()"
-            >
-
-                <option value="">
-                    All Courses
-                </option>
-
-                <option value="B.Tech IT">
-                    B.Tech IT
-                </option>
-
-                <option value="B.Tech CSE">
-                    B.Tech CSE
-                </option>
-
-                <option value="BCA">
-                    BCA
-                </option>
-
-                <option value="MCA">
-                    MCA
-                </option>
-
-            </select>
-
-        </section>
-
-
-        <!-- Student Records -->
-
-        <section class="records">
-
-            <div class="records-header">
-
-                <h2>📋 Student Records</h2>
-
-                <button
-                    class="delete-all"
-                    onclick="deleteAllStudents()"
-                >
-                    🗑️ Delete All
-                </button>
-
-            </div>
-
-
-            <div class="table-container">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>#</th>
-                            <th>Roll No</th>
-                            <th>Name</th>
-                            <th>Course</th>
-                            <th>Action</th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody id="studentTable">
-
-                        <!-- Students will appear here -->
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- Footer -->
-
-    <footer>
-
-        <p>
-            © 2026 Student Management System | Made with ❤️
-        </p>
-
-    </footer>
-
-
-    <!-- JavaScript -->
+            </section>
+        </main>
+    </div>
 
     <script src="script.js"></script>
-
 </body>
 </html>
